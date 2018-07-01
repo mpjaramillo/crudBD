@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1>Agregar Estudiante</h1>
+    <form method="POST" action="/" class="form-inline" style="background: #eee;">
+      <div class="form-group" style="padding: 0.5em 0.5em;">
+        <input type="text" class="form-control" name="id" placeholder="1103186308">
+      </div>
+      <div class="form-group" style="padding: 0.5em 0.5em;">
+        <input type="text" class="form-control" name="nombre" placeholder="Ana Maria">
+      </div>
+      <div class="form-group" style="padding: 0.5em 0.5em;">
+       <input type="text" class="form-control" name="apellido" placeholder="Jara Suarez">
+      </div>      
+      <button type="submit" class="btn btn-success" >Add</button>
+      
+    </form>
+    <h1>Estudiantes</h1>
+
+    <table class="table table-bordered">
+      {% for estudiante in estudiantes %}
+      <tr style="background: #eee;">
+        <td>
+          <p>{{estudiante.id}}</p>
+          <p>{{estudiante.nombre}}</p>
+          <p>{{estudiante.apellido}}</p>
+        </td>
+        <td>
+          <form method="POST" action="./update" class="form-group">
+            <div class="form-inline" style="padding: 0.5em 0.5em;">
+              <input type="hidden" value="{{estudiante.id}}" name="id">
+            </div>
+            <div class="col-xs-4">
+              <input  type="text" value="{{estudiante.nombre}}" placeholder="{{estudiante.nombre}}"  name="newNombre">
+              <input  type="text" value="{{estudiante.apellido}}" name="newApellido">
+              <input type="submit" class="btn btn-info" value="Update">       
+           </div>
+            
+          </form>
+        </td>
+        <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{estudiante.id}}" name="id">
+              <input type="submit" value="Delete" class="btn btn-danger">
+            </form>
+          </td>
+       </tr>
+      {% endfor %}
+
+    </table>
+  </body>
+</html>
